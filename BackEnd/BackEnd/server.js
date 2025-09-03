@@ -33,9 +33,6 @@ app.use('/api/auth',authRouter)
 app.use('/api/user',userRouter)
 app.use("/api/messages",messageRouter)
 app.use("/api/anime", anime);
-app.get("/", (req, res) => {
-  res.send("Backend is working ✅");
-});
 httpServer.listen(PORT, () => {
   console.log(`Server/api/user/data running on http://localhost:${PORT}`);
 });
