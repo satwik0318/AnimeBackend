@@ -14,8 +14,12 @@ const { initializeSocket } = require('./Socket/SocketChat');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Fix allowedOrigins to include production frontend
-const allowedOrigins = ['http://localhost:5173', 'https://animeppl.onrender.com'];
+// ✅ Trusted frontend origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://animeppl.onrender.com',
+  'https://anime4u-q9xl.onrender.com'
+];
 
 const httpServer = http.createServer(app);
 
@@ -35,7 +39,7 @@ const io = new Server(httpServer, {
 // store online users
 initializeSocket(io);
 
-// ✅ Fix Express CORS middleware to handle multiple origins
+// ✅ Express CORS Middleware
 app.use(cors({
   origin: function (origin, callback) {
     if (allowedOrigins.includes(origin) || !origin) {
@@ -60,5 +64,5 @@ app.get("/", (req, res) => {
 });
 
 httpServer.listen(PORT, () => {
-  console.log(`Server/api/user/data running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
